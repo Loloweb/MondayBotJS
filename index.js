@@ -1,16 +1,15 @@
-const {Client, Collection, Events, IntentsBitField} = require('discord.js');
+const {Client, Collection, Events, IntentsBitField, GatewayIntentBits} = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 const cron = require('node-cron');
+const fs = require('node:fs');
+const path = require('node:path');
 
 //const CHANNEL_ID = '729426983699742791'; // update-avenue
 const CHANNEL_ID = '553609326757937162'; // bot-boulevard
 
 const client = new Client({
     intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMembers,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent,
+        GatewayIntentBits.Guilds,
     ],
 });
 

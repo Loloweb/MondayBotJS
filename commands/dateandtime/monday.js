@@ -5,6 +5,8 @@ module.exports = {
 		.setName('monday')
 		.setDescription('Is it Monday yet?'),
 	async execute(interaction) {
+        // Check if today is Monday
+        const today = new Date();
         if (today.getDay() !== 1) {
             const daysUntilMonday = (8 - today.getDay()) % 7;
             return interaction.reply(`Nope. ${daysUntilMonday} day(s) until Monday.`);
