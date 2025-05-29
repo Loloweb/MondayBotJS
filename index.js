@@ -1,4 +1,4 @@
-const {Client, Collection, Events, IntentsBitField, GatewayIntentBits} = require('discord.js');
+const {Client, Collection, Events, GatewayIntentBits, PresenceUpdateStatus, ActivityType } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 const cron = require('node-cron');
 const fs = require('node:fs');
@@ -37,16 +37,28 @@ starttime = new Date();
 client.on(Events.ClientReady, readyClient => {
     console.log(`Logged in as ${readyClient.user.tag}!`);
     console.log('Time is ' + starttime.toLocaleTimeString());
-
+	if (starttime.getDay() === 1) {
+		readyClient.user.setActivity('a Monday!', { type: ActivityType.Watching });
+	} else {
+		readyClient.user.setActivity('for Mondays...', { type: ActivityType.Watching });
+	}
     // Schedule task: At 00:00 every Monday
     cron.schedule('0 0 * * 1', async () => {
+
         const channel = await client.channels.fetch(CHANNEL_ID);
         if (channel) {
             channel.send('Monday!');
+			console.log("Monday!");
+			readyClient.user.setActivity('a Monday!', { type: ActivityType.Watching });
         }
     }, {
         timezone: "Europe/London" // lol
     });
+	cron.schedule('0 0 * * 2', async () => {
+		readyClient.user.setActivity('for Mondays...', { type: ActivityType.Watching });
+	}, {
+		timezone: "Europe/London"
+	});
 });
 
 client.on(Events.InteractionCreate, async interaction => {
