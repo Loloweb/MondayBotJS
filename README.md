@@ -1,6 +1,12 @@
-# Monday Bot : Discord Edition
-A Node.js Discord bot that writes "Monday!" every Monday at midnight GMT.
+# Monday Bot: Discord Edition
+A Node.js Discord bot that writes "Monday!" every Monday at midnight London time.
 
-Requires discord.js : ```npm i```
+Get the libraries needed: ```npm i```
 
-Made for a friend.
+Update Slash commands: ```node deploy-commands.js```
+
+Note: by default, the commands only work on Bloops' Discord server. Change the guildId to yours in config.json or make the commands global by modifying deploy-commands.js
+
+Run it: ```node index.js```
+
+Made for Bloops.
